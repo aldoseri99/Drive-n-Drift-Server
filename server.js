@@ -20,10 +20,12 @@ const bookingRouter=require('./routes/bookingRouter')
 const insuranceRouter=require('./routes/insuranceRouter')
 const reviewRouter=require('./routes/reviewRouter')
 const vehicleRouter=require('./routes/vehicleRouter')
+const AuthRouter = require('./routes/AuthRouter')
 app.use('/booking',bookingRouter)
 app.use('/insurance',insuranceRouter)
 app.use('/review',reviewRouter)
 app.use('/vehicle',vehicleRouter)
+app.use('/auth', AuthRouter)
 
 
 
