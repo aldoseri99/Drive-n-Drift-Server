@@ -1,13 +1,22 @@
-const { vehicleSchema, Vehicle } = require('./vehicle');
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require("mongoose")
 
-const bookingSchema = new mongoose.Schema({
-  date: {type: Date, required: true},
-  user: {type: Number, required: true},
-  Vehicle: [vehicleSchema],
-})
+const bookingSchema = new mongoose.Schema(
+  {
+    startDate: { type: Date, required: true },
+    endDate: { type: Date, required: true },
+    totalPrice: { type: Number, required: true },
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "canceled", "completed"],
+      default: "pending",
+    },
+    insuranceId: { type: mongoose.Schema.Types.ObjectId, ref: "Insurance" },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    vehicle: { type: mongoose.Schema.Types.ObjectId, ref: "Vehicle" },
+  },
+  { timestamps: true }
+)
 
-const Booking = mongoose.model('Booking', bookingSchema);
+const Booking = mongoose.model("Booking", bookingSchema)
 
-module.exports = { Booking, bookingSchema };
+module.exports = { Booking, bookingSchema }
