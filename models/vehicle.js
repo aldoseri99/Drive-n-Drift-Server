@@ -8,6 +8,8 @@ const vehicleSchema = new Schema(
     description: { type: String },
     color: { type: String },
     category: { type: String },
+    price: { type: Number },
+    image: { type: String },
   },
   { timestamps: true }
 )
