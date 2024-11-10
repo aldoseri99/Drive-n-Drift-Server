@@ -1,14 +1,14 @@
-const { vehicleSchema, Vehicle } = require('./vehicle');
-const {bookingSchema}= require('./booking');
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const mongoose = require("mongoose")
 
-const insuranceSchema = Schema({
-  insuranceType: {type: String, required: true},
-  booking: [bookingSchema],
-  Vehicle: [vehicleSchema]
-})
+const insuranceSchema = new mongoose.Schema(
+  {
+    insuranceType: { type: String, required: true },
+    price: { type: Number, required: true },
+    termsAndConditions: { type: String },
+  },
+  { timestamps: true }
+)
 
-const Insurance = mongoose.model('Insurance', insuranceSchema);
+const Insurance = mongoose.model("Insurance", insuranceSchema)
 
-module.exports = { Insurance, insuranceSchema };
+module.exports = { Insurance, insuranceSchema }
