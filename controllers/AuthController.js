@@ -1,29 +1,35 @@
 const User = require("../models/User")
 const middleware = require("../middleware")
+const { uploadToCloudinary } = require("./uploadHelper")
 
 const Register = async (req, res) => {
   try {
     // Extracts the necessary fields from the request body
-    const { email, password, name, username } = req.body
+    const { email, password, name, username, image } = req.body
     // Hashes the provided password
     let passwordDigest = await middleware.hashPassword(password)
     // Checks if there has already been a user registered with that email
     let existingUser = await User.findOne({ email })
-    let existingUsername = await User.findOne({ username })
     if (existingUser) {
       return res.send({
         message: "A user with that email has already been registered!",
       })
-    } else if (existingUsername) {
-      return res.send({
-        message: "A user with that username has already been registered!",
-      })
     } else {
+      let imageData = {}
+      if (image) {
+        imageData = await uploadToCloudinary(image, "profile-pic")
+        console.log("Image data from Cloudinary:", imageData)
+      }
+      console.log("Image data from Cloudinary:", imageData)
       const user = await User.create({
         name,
         email,
         passwordDigest,
         username,
+        image: {
+          url: imageData.url,
+          publicId: imageData.public_id,
+        },
       })
       // Sends the user as a response
       res.send(user)
