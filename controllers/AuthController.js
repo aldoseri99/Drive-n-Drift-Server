@@ -67,13 +67,14 @@ const Login = async (req, res) => {
         token,
       })
     } else {
+      console.log("Incorrect password!")
       return res.send({
         message: "Incorrect password!",
       })
     }
   } catch (error) {
     console.log(error)
-    res.status(401).send({ status: "Error", msg: "An error has occurred!" })
+    res.status(401).send({ status: "Error", message: "An error has occurred!" })
   }
 }
 
@@ -134,9 +135,16 @@ const UpdateUser = async (req, res) => {
   }
 }
 
+const CheckSession = async (req, res) => {
+  const { payload } = res.locals
+
+  res.send(payload)
+}
+
 module.exports = {
   Register,
   Login,
   UpdateUser,
   UpdatePassword,
+  CheckSession,
 }
