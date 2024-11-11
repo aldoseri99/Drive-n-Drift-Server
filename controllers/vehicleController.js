@@ -1,4 +1,5 @@
 const { Vehicle } = require("../models")
+const { uploadToCloudinary } = require("./uploadHelper") // Adjust path as needed
 
 const GetVehicles = async (req, res) => {
   try {
@@ -10,11 +11,36 @@ const GetVehicles = async (req, res) => {
 }
 
 const CreateVehicle = async (req, res) => {
+  const { brand, model, description, color, category, price, image } = req.body
+
   try {
-    const vehicles = await Vehicle.create({ ...req.body })
-    res.send(vehicles)
+    let imageData = {}
+
+    if (image) {
+      imageData = await uploadToCloudinary(image, "vehicles")
+      console.log("Image data from Cloudinary:", imageData)
+    }
+
+    // Create a new vehicle entry in the database with image data
+    const vehicle = await Vehicle.create({
+      brand,
+      model,
+      description,
+      color,
+      category,
+      price,
+      image: {
+        url: imageData.url,
+        publicId: imageData.public_id,
+      },
+    })
+
+    res.status(201).json(vehicle)
   } catch (error) {
-    throw error
+    console.error("Error creating vehicle:", error)
+    res
+      .status(500)
+      .json({ error: "An error occurred while creating the vehicle." })
   }
 }
 

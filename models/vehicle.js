@@ -9,7 +9,16 @@ const vehicleSchema = new Schema(
     color: { type: String },
     category: { type: String },
     price: { type: Number },
-    image: { type: String },
+    image: {
+      publicId: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
+    },
   },
   { timestamps: true }
 )
