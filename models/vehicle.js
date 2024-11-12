@@ -7,7 +7,7 @@ const vehicleSchema = new Schema(
     model: { type: String },
     description: { type: String },
     color: { type: String },
-    category: { type: String },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
     price: { type: Number },
     image: {
       publicId: {
