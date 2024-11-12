@@ -4,6 +4,7 @@ const { Insurance } = require("./insurance")
 const { Review } = require("./review")
 const { Vehicle } = require("./vehicle")
 const { User } = require("./User")
+const { Category } = require("./category")
 
 module.exports = {
   Booking,
@@ -11,4 +12,5 @@ module.exports = {
   Review,
   Vehicle,
   User,
+  Category
 }
