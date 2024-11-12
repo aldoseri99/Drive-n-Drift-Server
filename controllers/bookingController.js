@@ -13,7 +13,6 @@ const GetBookings = async (req, res) => {
 const CreateBooking = async (req, res) => {
   try {
     const bookings = await Booking.create({ ...req.body })
-    console.log(bookings._id)
     res.send(bookings)
   } catch (error) {
     throw error

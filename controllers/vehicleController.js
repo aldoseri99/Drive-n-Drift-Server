@@ -47,7 +47,6 @@ const CreateVehicle = async (req, res) => {
 const DetailVehicle = async (req, res) => {
   try {
     const vehicle = await Vehicle.findOne({ _id: req.params.vehicle_id })
-    console.log(vehicle)
 
     res.send(vehicle)
   } catch (error) {
@@ -62,7 +61,6 @@ const UpdateVehicle = async (req, res) => {
       },
       { ...req.body }
     )
-    console.log(vehicle)
 
     res.send(vehicle)
   } catch (error) {}

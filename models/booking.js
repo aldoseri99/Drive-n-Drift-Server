@@ -2,9 +2,9 @@ const mongoose = require("mongoose")
 
 const bookingSchema = new mongoose.Schema(
   {
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
-    totalPrice: { type: Number, required: true },
+    startDate: { type: Date, required: false },
+    endDate: { type: Date, required: false },
+    totalPrice: { type: Number, required: false },
     status: {
       type: String,
       enum: ["pending", "confirmed", "canceled", "completed"],
