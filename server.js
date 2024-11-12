@@ -20,11 +20,16 @@ const bookingRouter = require("./routes/bookingRouter")
 const insuranceRouter = require("./routes/insuranceRouter")
 const reviewRouter = require("./routes/reviewRouter")
 const vehicleRouter = require("./routes/vehicleRouter")
+const categoryRouter = require('./routes/categoryRouter')
 const AuthRouter = require("./routes/AuthRouter")
+
+
+
 app.use("/booking", bookingRouter)
 app.use("/insurance", insuranceRouter)
 app.use("/review", reviewRouter)
 app.use("/vehicle", vehicleRouter)
+app.use('/category', categoryRouter)
 app.use("/auth", AuthRouter)
 
 app.listen(PORT, () => {
