@@ -7,7 +7,7 @@ const bookingSchema = new mongoose.Schema(
     totalPrice: { type: Number, required: false },
     status: {
       type: String,
-      enum: ["pending", "confirmed", "canceled", "completed"],
+      enum: ["Pending", "Confirmed", "Rejected", "Completed"],
       default: "pending",
     },
     insuranceId: { type: mongoose.Schema.Types.ObjectId, ref: "Insurance" },
