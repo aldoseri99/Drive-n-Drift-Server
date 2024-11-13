@@ -7,6 +7,7 @@ router.post("/", bookingController.CreateBooking)
 router.get("/:booking_id", bookingController.BookingDetail)
 router.put("/:booking_id", bookingController.UpdateBooking)
 router.delete("/:booking_id", bookingController.DeleteBooking)
-router.post('/autoEmail', bookingController.SendEmail)
+router.post("/autoEmail", bookingController.SendEmail)
+router.post("/statusEmail", bookingController.sendStatus)
 
 module.exports = router

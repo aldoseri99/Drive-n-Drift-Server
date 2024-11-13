@@ -30,7 +30,7 @@ const Register = async (req, res) => {
           url: imageData.url,
           publicId: imageData.public_id,
         },
-        role: "admin",
+        role: "customer",
       })
       // Sends the user as a response
       res.send(user)
@@ -122,6 +122,7 @@ const UpdateUser = async (req, res) => {
     console.log(role)
 
     let user = await User.findByIdAndUpdate(req.params.user_id, { role })
+    console.log(user)
 
     let payload = {
       id: user._id,
