@@ -30,6 +30,7 @@ const Register = async (req, res) => {
           url: imageData.url,
           publicId: imageData.public_id,
         },
+        role: "admin",
       })
       // Sends the user as a response
       res.send(user)
@@ -59,6 +60,7 @@ const Login = async (req, res) => {
         username: user.username,
         name: user.name,
         email: user.email,
+        role: user.role,
       }
       let token = middleware.createToken(payload)
 
@@ -96,8 +98,7 @@ const UpdatePassword = async (req, res) => {
         username: user.username,
         name: user.name,
         email: user.email,
-        followings: user.followings,
-        profilePic: user.profilePic,
+        role: user.role,
       }
       return res.send({ status: "Password Updated!", user: payload })
     }
@@ -124,6 +125,7 @@ const UpdateUser = async (req, res) => {
       username: user.username,
       name: user.name,
       email: user.email,
+      role: user.role,
     }
     return res.send({ status: "User Updated!", user: payload })
   } catch (error) {
