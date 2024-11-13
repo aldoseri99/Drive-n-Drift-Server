@@ -61,6 +61,7 @@ const Login = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        image: user.image.url,
       }
       let token = middleware.createToken(payload)
 
@@ -99,6 +100,7 @@ const UpdatePassword = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        image: user.image.url,
       }
       return res.send({ status: "Password Updated!", user: payload })
     }
@@ -116,9 +118,10 @@ const UpdatePassword = async (req, res) => {
 
 const UpdateUser = async (req, res) => {
   try {
-    const { name } = req.body
+    const { role } = req.body
+    console.log(role)
 
-    let user = await User.findByIdAndUpdate(req.params.user_id, { name })
+    let user = await User.findByIdAndUpdate(req.params.user_id, { role })
 
     let payload = {
       id: user._id,
@@ -126,6 +129,7 @@ const UpdateUser = async (req, res) => {
       name: user.name,
       email: user.email,
       role: user.role,
+      image: user.image.url,
     }
     return res.send({ status: "User Updated!", user: payload })
   } catch (error) {
@@ -143,10 +147,26 @@ const CheckSession = async (req, res) => {
   res.send(payload)
 }
 
+const GetUserInfo = async (req, res) => {
+  try {
+    let user = await User.findOne({ _id: req.params.user_id })
+    res.send({ user })
+  } catch (error) {
+    throw error
+  }
+}
+
+const GetAllUsers = async (req, res) => {
+  let users = await User.find({ _id: { $ne: req.params.user_id } })
+  res.send({ users })
+}
+
 module.exports = {
   Register,
   Login,
   UpdateUser,
   UpdatePassword,
   CheckSession,
+  GetUserInfo,
+  GetAllUsers,
 }

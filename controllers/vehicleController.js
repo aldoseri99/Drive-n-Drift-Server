@@ -46,7 +46,9 @@ const CreateVehicle = async (req, res) => {
 
 const DetailVehicle = async (req, res) => {
   try {
-    const vehicle = await Vehicle.findOne({ _id: req.params.vehicle_id })
+    const vehicle = await Vehicle.findOne({
+      _id: req.params.vehicle_id,
+    }).populate("category")
 
     res.send(vehicle)
   } catch (error) {
