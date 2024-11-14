@@ -81,7 +81,7 @@ const SendEmail = async (req, res) => {
   try {
     const { name, emails } = req.body
     const subject = "Booking Confirmation"
-    const text = `Dear Customer,\n\nYour booking is currently pending. If you have any questions or need further assistance, please don't hesitate to contact us at your convenience.\n\nBest regards,\Drive & Drift`
+    const text = `Dear ${name},\n\nYour booking is currently pending. If you have any questions or need further assistance, please don't hesitate to contact us at your convenience.\n\nBest regards,\Drive & Drift`
 
     if (!emails || !subject || !text) {
       return res.status(400).send("Missing required fields")
