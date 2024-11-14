@@ -83,19 +83,6 @@ const SendEmail = async (req, res) => {
     const subject = "Booking Confirmation"
     const text = `Dear ${name},\n\nYour booking is currently pending. If you have any questions or need further assistance, please don't hesitate to contact us at your convenience.\n\nBest regards,\Drive & Drift`
 
-    const html = `
-    <html>
-      <body>
-        <h2>Booking Status Update</h2>
-        <img src="https://res.cloudinary.com/drd89nnxf/image/upload/v1731531530/gm04joq2sem6upt5ipbp.png" alt="Company Logo" style="max-width: 150px; max-height: 150px; margin-bottom: 20px; border-radius:50%;">
-        <p>Dear ${name},</p>
-        <p>Your booking is currently pending.</p>
-        <p>If you have any questions or need further assistance, please don't hesitate to contact us at your convenience.</p>
-        <br>
-        <p>Best regards,</p>
-        <p>Drive & Drift</p>
-      </body>
-    </html>`
     if (!emails || !subject || !text) {
       return res.status(400).send("Missing required fields")
     }
